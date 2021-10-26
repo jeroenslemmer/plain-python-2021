@@ -1,4 +1,4 @@
-from lib.Plain import Plain
+from plain.Plain import Plain
 
 level = { 'name': 'my secret level', 
       'graphicsMap' : 'graphics/set0',

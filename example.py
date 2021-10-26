@@ -1,4 +1,4 @@
-from lib.Plain import Plain
+from plain.Plain import Plain
 
 plain = Plain('level 1')
 
