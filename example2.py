@@ -1,6 +1,6 @@
 from Plain import Plain
 
-level = { 'name': 'level 1', 
+level = { 'name': 'my secret level', 
       'tileTypes': [
         {}, # rock
         {'openIn': [0,1,2,3], 'openOut': [0,1,2,3] }, # plain

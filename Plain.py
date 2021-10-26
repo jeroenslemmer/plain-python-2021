@@ -98,7 +98,6 @@ class Plain:
   objects = []
   _speeds = [1,2,3,4,5,6,7,8,9,10]
   speed = 1
-  _levelName = 'Unknown level'
   _collision = None
   _backgroundColor = (0,0,0)
   _eventSleepTime = 300
@@ -108,7 +107,8 @@ class Plain:
   def __init__(self, levelName = ''):
     pygame.init()
     self._clock = pygame.time.Clock()
-    self.loadLevel(levelName)
+    if levelName != '':
+      self.loadLevel(levelName)
 
   def _drawPlain(self):
     self._screen.fill(self._backgroundColor)
@@ -144,7 +144,7 @@ class Plain:
     return [x,y]
 
   def _drawState(self, playerXY):
-    pygame.display.set_caption('Plains: ' + self._levelName)
+    pygame.display.set_caption('Plain: ' + self.level['name'])
     self._drawPlain()
     self._drawGoal()
     self._drawPlayer(playerXY)
@@ -301,15 +301,22 @@ class Plain:
     if not success:
       levelToLoad = self._defaultLevels[0]
     self.loadMyLevel(levelToLoad)
-    self._levelName = levelName
     return success
 
+  def levelExist(self):
+    if self.level is None:
+      print('No level loaded!')
+      return False
+    return True
+
   def turnLeft(self):
+    if not self.levelExist(): return
     newOrientation = abs((self.playerOrientation - 1) % 4)
     self._animateMove('left', newOrientation)
     self.playerOrientation = newOrientation
 
   def turnRight(self):
+    if not self.levelExist(): return
     newOrientation = abs((self.playerOrientation + 1) % 4)
     self._animateMove('right', newOrientation)
     self.playerOrientation = newOrientation
@@ -354,6 +361,7 @@ class Plain:
     return newPosition
 
   def moveForward(self):
+    if not self.levelExist(): return
     moved = False
     newPosition = self._getNewPosition(self.playerOrientation)
     currentTile = self._getTile(self.playerPosition)
@@ -376,6 +384,7 @@ class Plain:
     pass
 
   def canPass(self, direction = 0):
+    if not self.levelExist(): return
     newPosition = self._getNewPosition(direction)
     currentTile = self._getTile(self.playerPosition)
     if newPosition is None:
