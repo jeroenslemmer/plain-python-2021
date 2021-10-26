@@ -1,6 +1,7 @@
-from Plain import Plain
+from lib.Plain import Plain
 
 level = { 'name': 'my secret level', 
+      'graphicsMap' : 'graphics/set0',
       'tileTypes': [
         {}, # rock
         {'openIn': [0,1,2,3], 'openOut': [0,1,2,3] }, # plain
